@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+
 import java.sql.DriverManager;
 import java.time.Duration;
 
@@ -22,7 +23,7 @@ public class C01_Examples {
        İstediğiniz şekilde olup olmadığını test edin
        Sayfayı kapatın
     */
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         System.setProperty("webdriver.chrome.driver", "src/resources/Drivers/chromedriver.exe");
         WebDriver driver = new ChromeDriver(new ChromeOptions().addArguments("--remote-allow-origins=*"));
 
