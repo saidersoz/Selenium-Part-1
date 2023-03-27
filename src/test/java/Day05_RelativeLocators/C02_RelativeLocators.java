@@ -24,26 +24,28 @@ public class C02_RelativeLocators {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-
         //https://www.diemol.com/selenium-4-demo/relative-locators-demo.html	adresine gidin
         driver.get("https://www.diemol.com/selenium-4-demo/relative-locators-demo.html");
-        Thread.sleep(1800);
+        Thread.sleep(1000);
 
         //Berlin’i 3 farkli relative locator ile locate edin
-        WebElement nyc = driver.findElement(By.cssSelector("img[id='pid3_thumb']"));
-        WebElement bayArea = driver.findElement(By.cssSelector("img[id='pid8_thumb']"));
-        WebElement berlin = driver.findElement(with(By.tagName("a")).below(nyc).toLeftOf(bayArea));
-        berlin.click();
-        Thread.sleep(1800);
+        WebElement NYCWebElement = driver.findElement(By.id("pid3_thumb"));
+        WebElement bayAreaWebElement = driver.findElement(By.id("pid8_thumb"));
+        WebElement berlinWebElement = driver.findElement(with(By.tagName("img")).below(NYCWebElement).
+                                                                               toLeftOf(bayAreaWebElement));
+        berlinWebElement.click();
+        Thread.sleep(1000);
 
         //Relative locator’larin dogru calistigini test edin
-        String actualIdDegeri = berlin.getAttribute("id");
-        String exceptedIdDegeri = "pid7_thumb";
+        System.out.println(berlinWebElement.getAttribute("id"));
+        System.out.println(NYCWebElement.getAttribute("id"));
+        String actualIdDegeri = berlinWebElement.getAttribute("id");
+        String expectedIdDegeri = "pid7_thumb";
 
-        if (actualIdDegeri.equals(exceptedIdDegeri)){
-            System.out.println("TEST PASSED");
+        if (actualIdDegeri.equals(expectedIdDegeri)){
+            System.out.println("Test Passed");
         }else {
-            System.out.println("TEST FAILED");
+            System.out.println("Test Failed");
         }
 
         //sayfayı kapatalım
