@@ -1,13 +1,11 @@
-package Day04;
+package Day04_XpathCssSelector;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import java.security.Key;
 import java.time.Duration;
 
 public class C01_Xpath {
@@ -17,7 +15,10 @@ public class C01_Xpath {
     public static void main(String[] args) throws InterruptedException {
 
         System.setProperty("webdriver.chrome.driver", "src/resources/Drivers/chromedriver.exe");
-        WebDriver driver = new ChromeDriver(new ChromeOptions().addArguments("--remote-allow-origins=*"));
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        WebDriver driver = new ChromeDriver(options);
+
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
@@ -31,14 +32,13 @@ public class C01_Xpath {
         searchButton.submit();
         Thread.sleep(1800);
 
-
         //hybrid bikes bölümüne tıklayın
+
         /*
         (//span[@class='a-size-base a-color-base'])[8] ==> Bu şekilde index kullanarak unique olarak WE ulaşabiliriz.
         //*[text()='Hybrid Bikes'] ==> xpath ile locate alırken html kodlarında attribute name olmayan yani <tag name=class değeri> text()
                                        bu şekilde locate edebiliriz.
          */
-
         WebElement hybridBikes = driver.findElement(By.xpath("//span[text()='Hybrid Bikes']"));
         System.out.println(hybridBikes.isDisplayed()); //WebElement görüntüleniyor mu? --> Görüntülenebiliyor True
         System.out.println(hybridBikes.isEnabled());   //WebElement erişilebiliyor mu? --> Erişilebiliyor True
@@ -46,10 +46,11 @@ public class C01_Xpath {
         hybridBikes.click();
         Thread.sleep(1800);
 
-
         //sadece sonuç yazısın yazdır
         WebElement sonuc = driver.findElement(By.xpath("(//div[@class='sg-col-inner'])[1]"));
-        System.out.println(sonuc.getText());
+        String sonucText = sonuc.getText();
+        String[] sonucArr = sonucText.split(" ");
+        System.out.println("Toplam "+ sonucArr[0]+ " Sonuç bulundu.");
         Thread.sleep(1800);
 
         //Karşınıza çıkan ilk sonucun resmine tıklayın
@@ -60,5 +61,4 @@ public class C01_Xpath {
         driver.close();
 
     }
-
 }
